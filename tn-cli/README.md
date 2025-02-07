@@ -1,5 +1,7 @@
 # Command Line Client for Tinode
 
+- [Go implementation](#tn-cli-go)
+
 This is a scriptable command line chat client. It's written in Python and can be used to extend Tinode using [gRPC](https://grpc.io) [API](../pbx/).
 
 Python 2.7 or 3.4+ is required. PIP 9.0.1 or newer is required.
@@ -104,3 +106,33 @@ The `--ssl-host` option makes the connection susceptible to the [Man-in-the-midd
 ## Crash on shutdown
 
 Python 3.6 sometimes crashes on shutdown with a message `Fatal Python error: PyImport_GetModuleDict: no module dictionary!`. That happens because Python is buggy: https://bugs.python.org/issue26153
+
+
+## tn-cli-go
+
+The Go version of Tinode CLI (tn-cli) follows the same rules and commands as described in the Python documentation. This section primarily serves to highlight the tasks completed so far, as the Go implementation is still in progress. 
+
+Either build the binary or use `go run .` in place of `tn-cli`.
+```bash
+cd tn-cli
+go build -o tn-cli .
+```
+
+### Usage
+```
+tn-cli [flags]
+tn-cli [command]
+```
+
+### Available Commands
+- `acc`         Create or alter an account
+- `login`       Authenticate current session
+
+### Flags
+- `--host string`          address of Tinode gRPC server (default: "localhost:16060")
+- `--log_flags string`     comma-separated list of log flags (default: "stdFlags")
+- `--login-basic string`   login using basic authentication username:password
+- `--verbose`              log full JSON representation of all messages
+
+Use `tn-cli [command] --help` for more information about a command.
+
